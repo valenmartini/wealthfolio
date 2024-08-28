@@ -11,8 +11,11 @@ import { deleteAccount, getAccounts } from '@/commands/account';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/components/ui/use-toast';
+import { useTranslation } from 'react-i18next';
 
 const SettingsAccountsPage = () => {
+  const { t } = useTranslation("settings");
+
   const queryClient = useQueryClient();
 
   const { data: accounts, isLoading } = useQuery<Account[], Error>({
@@ -35,15 +38,15 @@ const SettingsAccountsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['holdings'] });
       queryClient.invalidateQueries({ queryKey: ['portfolio_history'] });
       toast({
-        title: 'Account deleted successfully.',
+        title: t("settings.accounts.page.toasts.accountDeleted.title"),
         className: 'bg-green-500 text-white border-none',
       });
     },
     onError: () => {
       toast({
-        title: 'Uh oh! Something went wrong.',
+        title: t("settings.accounts.page.toasts.accountDeletedError.title"),
         description:
-          'There was a problem deleting this account. Please check if there is any data related to this account.',
+        t("settings.accounts.page.toasts.accountDeletedError.description"),
         className: 'bg-red-500 text-white border-none',
       });
     },
@@ -70,10 +73,10 @@ const SettingsAccountsPage = () => {
   return (
     <>
       <div className="space-y-6">
-        <SettingsHeader heading="Accounts" text=" Manage your investment and saving accounts.">
+        <SettingsHeader heading={t("settings.accounts.page.title")} text={t("settings.accounts.page.description")}>
           <Button onClick={() => handleAddAccount()}>
             <Icons.PlusCircle className="mr-2 h-4 w-4" />
-            Add account
+            {t("settings.accounts.page.addAccount")}
           </Button>
         </SettingsHeader>
         <Separator />

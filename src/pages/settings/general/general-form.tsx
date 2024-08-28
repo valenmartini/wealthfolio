@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -25,14 +25,18 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 import { useSettingsContext } from '@/lib/settings-provider';
+import { useTranslation } from 'react-i18next';
 
 const appearanceFormSchema = z.object({
   baseCurrency: z.string({ required_error: 'Please select a base currency.' }),
+  lng: z.string({required_error: "Please select a language"})
 });
 
 type GeneralSettingFormValues = z.infer<typeof appearanceFormSchema>;
 
 export function GeneralSettingForm() {
+  const { t, i18n } = useTranslation("settings");
+
   const { settings, updateSettings } = useSettingsContext();
   const defaultValues: Partial<GeneralSettingFormValues> = {
     baseCurrency: settings?.baseCurrency || 'USD',
@@ -43,6 +47,7 @@ export function GeneralSettingForm() {
   });
 
   function onSubmit(data: GeneralSettingFormValues) {
+    i18n.changeLanguage(data.lng);
     const updatedSettings = {
       id: settings?.id || 1,
       theme: settings?.theme || 'light',
@@ -60,7 +65,7 @@ export function GeneralSettingForm() {
           name="baseCurrency"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Currency</FormLabel>
+              <FormLabel>{t("settings.general.fields.currency.label")}</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl className="w-[300px] ">
@@ -71,15 +76,15 @@ export function GeneralSettingForm() {
                     >
                       {field.value
                         ? worldCurrencies.find((currency) => currency.value === field.value)?.label
-                        : 'Select account currency'}
+                        : t("settings.general.fields.currency.placeholderButton")}
                       <Icons.ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-[300px] p-0">
                   <Command>
-                    <CommandInput placeholder="Search currency..." />
-                    <CommandEmpty>No currency found.</CommandEmpty>
+                    <CommandInput placeholder={t("settings.general.fields.currency.placeholderInput")} />
+                    <CommandEmpty>{t("settings.general.fields.currency.notFound")}</CommandEmpty>
                     <CommandGroup>
                       {worldCurrencies.map((currency) => (
                         <CommandItem
@@ -102,13 +107,39 @@ export function GeneralSettingForm() {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <FormDescription>Select your base currency.</FormDescription>
+              <FormDescription>{t("settings.general.fields.currency.description")}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lng"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("settings.general.fields.language.label")}</FormLabel>
+              <div className="relative w-max">
+                <FormControl>
+                  <select
+                    className={cn(
+                      buttonVariants({ variant: 'outline' }),
+                      'w-[200px] appearance-none bg-transparent font-normal',
+                    )}
+                    {...field}
+                  >
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                  </select>
+                </FormControl>
+                <Icons.ChevronDown className="absolute right-3 top-2.5 h-4 w-4 opacity-50" />
+              </div>
+              <FormDescription>{t("settings.general.fields.language.description")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Save</Button>
+        <Button type="submit">{t("settings.general.submitButton")}</Button>
       </form>
     </Form>
   );

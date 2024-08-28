@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Icons } from '@/components/icons';
+import { useTranslation } from 'react-i18next';
 
 const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark'], {
@@ -30,6 +31,8 @@ const appearanceFormSchema = z.object({
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>;
 
 export function AppearanceForm() {
+  const { t } = useTranslation("settings");
+
   const { settings, updateSettings } = useSettingsContext();
   const defaultValues: Partial<AppearanceFormValues> = {
     theme: settings?.theme as AppearanceFormValues['theme'],
@@ -44,6 +47,7 @@ export function AppearanceForm() {
     const updatedSettings = {
       id: settings?.id || 1,
       baseCurrency: settings?.baseCurrency || 'USD',
+      lng: settings?.lng ?? "en",
       ...data,
     };
     updateSettings(updatedSettings);
@@ -57,7 +61,7 @@ export function AppearanceForm() {
           name="font"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Font</FormLabel>
+              <FormLabel>{t("settings.appearance.fields.font.label")}</FormLabel>
               <div className="relative w-max">
                 <FormControl>
                   <select
@@ -74,7 +78,7 @@ export function AppearanceForm() {
                 </FormControl>
                 <Icons.ChevronDown className="absolute right-3 top-2.5 h-4 w-4 opacity-50" />
               </div>
-              <FormDescription>Set your prefered font family to use.</FormDescription>
+              <FormDescription>{t("settings.appearance.fields.font.description")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -84,8 +88,8 @@ export function AppearanceForm() {
           name="theme"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel>Theme</FormLabel>
-              <FormDescription>Select your prefered theme for the application.</FormDescription>
+              <FormLabel>{t("settings.appearance.fields.theme.label")}</FormLabel>
+              <FormDescription>{t("settings.appearance.fields.theme.description")}</FormDescription>
               <FormMessage />
               <RadioGroup
                 onValueChange={field.onChange}
@@ -113,7 +117,7 @@ export function AppearanceForm() {
                         </div>
                       </div>
                     </div>
-                    <span className="block w-full p-2 text-center font-normal">Light</span>
+                    <span className="block w-full p-2 text-center font-normal">{t("settings.appearance.fields.theme.light")}</span>
                   </FormLabel>
                 </FormItem>
                 <FormItem>
@@ -137,7 +141,7 @@ export function AppearanceForm() {
                         </div>
                       </div>
                     </div>
-                    <span className="block w-full p-2 text-center font-normal">Dark</span>
+                    <span className="block w-full p-2 text-center font-normal">{t("settings.appearance.fields.theme.dark")}</span>
                   </FormLabel>
                 </FormItem>
               </RadioGroup>
@@ -145,7 +149,7 @@ export function AppearanceForm() {
           )}
         />
 
-        <Button type="submit">Update preferences</Button>
+        <Button type="submit">{t("settings.appearance.submitButton")}</Button>
       </form>
     </Form>
   );

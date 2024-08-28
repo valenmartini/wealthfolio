@@ -1,32 +1,35 @@
 import { Outlet } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { SidebarNav } from './sidebar-nav';
+import { useTranslation } from 'react-i18next';
 
-const sidebarNavItems = [
-  {
-    title: 'General',
-    href: 'general',
-  },
-  {
-    title: 'Accounts',
-    href: 'accounts',
-  },
-  {
-    title: 'Goals',
-    href: 'goals',
-  },
-  {
-    title: 'Appearance',
-    href: 'appearance',
-  },
-];
 
 export default function SettingsLayout() {
+  const { t } = useTranslation("settings");
+
+  const sidebarNavItems = [
+    {
+      title: t("settings.sideBar.general"),
+      href: 'general',
+    },
+    {
+      title: t("settings.sideBar.accounts"),
+      href: 'accounts',
+    },
+    {
+      title: t("settings.sideBar.goals"),
+      href: 'goals',
+    },
+    {
+      title: t("settings.sideBar.appearance"),
+      href: 'appearance',
+    },
+  ];
   return (
     <>
       <div className="block p-6">
         <div className="space-y-0.5">
-          <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
+          <h2 className="text-2xl font-bold tracking-tight">{t("settings.title")}</h2>
           {/* <p className="text-muted-foreground">Manage the application settings and preferences.</p> */}
         </div>
         <Separator className="my-6" />

@@ -20,6 +20,7 @@ import {
 import { Icons } from '@/components/icons';
 
 import type { Goal } from '@/lib/types';
+import { useTranslation } from 'react-i18next';
 
 export interface GoalOperationsProps {
   goal: Goal;
@@ -36,21 +37,23 @@ export function GoalOperations({ goal, onEdit, onDelete }: GoalOperationsProps) 
     setShowDeleteAlert(false);
   };
 
+  const { t } = useTranslation("settings");
+
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
           <Icons.MoreVertical className="h-4 w-4" />
-          <span className="sr-only">Open</span>
+          <span className="sr-only">{t("settings.goals.operations.sr")}</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => onEdit(goal)}>Edit</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onEdit(goal)}>{t("settings.goals.operations.buttons.edit")}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="flex cursor-pointer items-center text-destructive focus:text-destructive"
             onSelect={() => setShowDeleteAlert(true)}
           >
-            Delete
+            {t("settings.goals.operations.buttons.delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -58,14 +61,14 @@ export function GoalOperations({ goal, onEdit, onDelete }: GoalOperationsProps) 
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure you want to delete this goal and related activities?
+            {t("settings.goals.operations.deleteAlert.title")}
             </AlertDialogTitle>
-            <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+            <AlertDialogDescription>{t("settings.goals.operations.deleteAlert.description")}</AlertDialogDescription>
           </AlertDialogHeader>
 
           <AlertDialogFooter>
             <input type="hidden" name="id" value={goal.id} />
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("settings.goals.operations.deleteAlert.cancel")}</AlertDialogCancel>
 
             <Button
               disabled={isDeleting}
@@ -77,7 +80,7 @@ export function GoalOperations({ goal, onEdit, onDelete }: GoalOperationsProps) 
               ) : (
                 <Icons.Trash className="mr-2 h-4 w-4" />
               )}
-              <span>Delete</span>
+              <span>{t("settings.goals.operations.deleteAlert.deleteButton")}</span>
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

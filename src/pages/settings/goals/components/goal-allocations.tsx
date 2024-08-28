@@ -4,6 +4,7 @@ import { toast } from '@/components/ui/use-toast';
 import { Account, Goal, GoalAllocation } from '@/lib/types';
 import { formatAmount } from '@/lib/utils';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface GoalsAllocationsProps {
   goals: Goal[];
@@ -21,6 +22,8 @@ const GoalsAllocations: React.FC<GoalsAllocationsProps> = ({
   const [allocations, setAllocations] = useState<GoalAllocation[]>(existingAllocations || []);
   const [totalAllocations, setTotalAllocations] = useState<{ [accountId: string]: number }>({});
   const [isExceeding, setIsExceeding] = useState<boolean>(false);
+
+  const { t } = useTranslation("settings");
 
   useEffect(() => {
     const totals = accounts.reduce(
@@ -61,9 +64,9 @@ const GoalsAllocations: React.FC<GoalsAllocationsProps> = ({
 
   const handleSubmit = () => {
     if (isExceeding) {
-      alert("Total allocation for an account can't exceed 100%");
+      alert(t("settings.goals.allocations.toasts.allocationExceeded.title"));
       toast({
-        title: "Total allocation for an account can't exceed 100%.",
+        title: t("settings.goals.allocations.toasts.allocationExceeded.title"),
         className: 'bg-red-500 text-white border-none',
       });
       return;
@@ -78,7 +81,7 @@ const GoalsAllocations: React.FC<GoalsAllocationsProps> = ({
           <thead>
             <tr>
               <th className="sticky left-0 z-10 bg-muted px-4 py-2 text-sm font-normal">
-                Goals \ Accounts
+                {t("settings.goals.allocations.table.head")}
               </th>
               {accounts.map((account) => (
                 <th key={account.id} className="border-l px-4 py-2 text-xs font-normal">
@@ -88,7 +91,7 @@ const GoalsAllocations: React.FC<GoalsAllocationsProps> = ({
             </tr>
             <tr>
               <td className="sticky left-0 z-10 border-r border-t bg-muted px-4 py-2 text-xs text-muted-foreground">
-                Total
+                {t("settings.goals.allocations.table.total")}
               </td>
               {accounts.map((account) => (
                 <td
@@ -136,7 +139,7 @@ const GoalsAllocations: React.FC<GoalsAllocationsProps> = ({
       </div>
       <div className="mt-4 text-right">
         <Button onClick={handleSubmit} disabled={isExceeding}>
-          Save Allocations
+          {t("settings.goals.allocations.submitButton")}
         </Button>
       </div>
     </>

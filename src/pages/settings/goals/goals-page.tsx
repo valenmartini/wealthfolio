@@ -13,8 +13,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/components/ui/use-toast';
 import GoalsAllocations from './components/goal-allocations';
 import { useAccounts } from '@/pages/account/useAccounts';
+import { useTranslation } from 'react-i18next';
 
 const SettingsGoalsPage = () => {
+  const { t } = useTranslation("settings");
+
   const queryClient = useQueryClient();
 
   const { data: goals, isLoading } = useQuery<Goal[], Error>({
@@ -65,7 +68,7 @@ const SettingsGoalsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       queryClient.invalidateQueries({ queryKey: ['goals_allocations'] });
       toast({
-        title: 'Allocation saved successfully.',
+        title: t("settings.goals.allocations.toasts.allocationSaved.title"),
         className: 'bg-green-500 text-white border-none',
       });
     },
@@ -87,17 +90,17 @@ const SettingsGoalsPage = () => {
   return (
     <>
       <div className="space-y-6">
-        <SettingsHeader heading="Goals" text=" Manage your investment and saving goals.">
+        <SettingsHeader heading={t("settings.goals.page.title")} text={t("settings.goals.page.description")}>
           <Button onClick={() => handleAddGoal()}>
             <Icons.PlusCircle className="mr-2 h-4 w-4" />
-            Add goal
+            {t("settings.goals.page.addGoal")}
           </Button>
         </SettingsHeader>
         <Separator />
         <div className="mx-auto w-full pt-8 ">
           {goals?.length ? (
             <>
-              <h3 className="p-2 text-xl font-bold">Goals</h3>
+              <h3 className="p-2 text-xl font-bold">{t("settings.goals.page.title")}</h3>
 
               <div className="divide-y divide-border rounded-md border">
                 {goals.map((goal: Goal) => (
@@ -109,10 +112,9 @@ const SettingsGoalsPage = () => {
                   />
                 ))}
               </div>
-              <h3 className="p-2 pt-12 text-xl font-bold">Allocations</h3>
+              <h3 className="p-2 pt-12 text-xl font-bold">{t("settings.goals.allocations.title")}</h3>
               <h5 className="p-2 pb-4 pt-0 text-sm font-light text-muted-foreground">
-                Click on a cell to specify the percentage of each account's allocation to your
-                goals.
+                {t("settings.goals.allocations.description")}
               </h5>
               <GoalsAllocations
                 goals={goals}
@@ -124,13 +126,13 @@ const SettingsGoalsPage = () => {
           ) : (
             <EmptyPlaceholder>
               <EmptyPlaceholder.Icon name="Goal" />
-              <EmptyPlaceholder.Title>No goal added!</EmptyPlaceholder.Title>
+              <EmptyPlaceholder.Title>{t("settings.goals.allocations.empty.title")}</EmptyPlaceholder.Title>
               <EmptyPlaceholder.Description>
-                You don&apos;t have any goal yet. Start adding your investment goals.
+              {t("settings.goals.allocations.empty.description")}
               </EmptyPlaceholder.Description>
               <Button onClick={() => handleAddGoal()}>
                 <Icons.Plus className="mr-2 h-4 w-4" />
-                Add an goal
+                {t("settings.goals.allocations.empty.addGoal")}
               </Button>
             </EmptyPlaceholder>
           )}

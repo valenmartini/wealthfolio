@@ -28,6 +28,7 @@ import { toast } from '@/components/ui/use-toast';
 
 import { newGoalSchema } from '@/lib/schemas';
 import { createGoal, updateGoal } from '@/commands/goal';
+import { useTranslation } from 'react-i18next';
 
 type NewGoal = z.infer<typeof newGoalSchema>;
 
@@ -39,21 +40,23 @@ interface GoalFormlProps {
 export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps) {
   const queryClient = useQueryClient();
 
+  const { t } = useTranslation("settings");
+
   const addGoalMutation = useMutation({
     mutationFn: createGoal,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       toast({
-        title: 'Goal added successfully.',
-        description: 'Start adding or importing this goal activities.',
+        title: t("settings.goals.form.toasts.goalAdded.title"),
+        description: t("settings.goals.form.toasts.goalAdded.description"),
         className: 'bg-green-500 text-white border-none',
       });
       onSuccess();
     },
     onError: () => {
       toast({
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem adding this goal.',
+        title: t("settings.goals.form.toasts.goalAddedError.title"),
+        description: t("settings.goals.form.toasts.goalAddedError.description"),
         className: 'bg-red-500 text-white border-none',
       });
     },
@@ -63,7 +66,7 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       toast({
-        title: 'Goal updated successfully.',
+        title: t("settings.goals.form.toasts.goalUpdated.title"),
         className: 'bg-green-500 text-white border-none',
       });
       onSuccess();
@@ -87,9 +90,9 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <DialogHeader>
-          <DialogTitle> {defaultValues?.id ? 'Update Goal' : 'Add Goal'}</DialogTitle>
+          <DialogTitle> {defaultValues?.id ? t("settings.goals.form.dialog.title.update") : t("settings.goals.form.dialog.title.add") }</DialogTitle>
           <DialogDescription>
-            {defaultValues?.id ? 'Update goal information' : ' Add an investment goal to track.'}
+            {defaultValues?.id ? t("settings.goals.form.dialog.description.update")  : t("settings.goals.form.dialog.description.add") }
           </DialogDescription>
         </DialogHeader>
 
@@ -102,9 +105,9 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Goal Name</FormLabel>
+                <FormLabel>{t("settings.goals.form.fields.title.label") }</FormLabel>
                 <FormControl>
-                  <Input placeholder="Goal display title" {...field} />
+                  <Input placeholder={t("settings.goals.form.fields.title.placeholder") } {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,9 +118,9 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Goal description</FormLabel>
+                <FormLabel>{t("settings.goals.form.fields.description.label") }</FormLabel>
                 <FormControl>
-                  <Input placeholder="Goal short description" {...field} />
+                  <Input placeholder={t("settings.goals.form.fields.description.placeholder") } {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -128,9 +131,9 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
             name="targetAmount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Target amount</FormLabel>
+                <FormLabel>{t("settings.goals.form.fields.target.label") }</FormLabel>
                 <FormControl>
-                  <Input type="number" inputMode="decimal" placeholder="Target amount" {...field} />
+                  <Input type="number" inputMode="decimal" placeholder={t("settings.goals.form.fields.target.placeholder") }{...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -179,7 +182,7 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
                   <FormControl>
                     <Switch checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
-                  <FormLabel className="space-y-0 pl-2"> Goal Achieved</FormLabel>
+                  <FormLabel className="space-y-0 pl-2"> {t("settings.goals.form.fields.archieved.label") }</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
@@ -188,12 +191,12 @@ export function GoalForm({ defaultValues, onSuccess = () => {} }: GoalFormlProps
         </div>
         <DialogFooter>
           <DialogTrigger asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("settings.goals.form.dialog.buttons.cancel") }</Button>
           </DialogTrigger>
           <Button type="submit">
             <Icons.Plus className="h-4 w-4" />
             <span className="hidden sm:ml-2 sm:inline">
-              {defaultValues?.id ? 'Update Goal' : 'Add Goal'}
+              {defaultValues?.id ? t("settings.goals.form.dialog.buttons.update") : t("settings.goals.form.dialog.buttons.add")}
             </span>
           </Button>
         </DialogFooter>

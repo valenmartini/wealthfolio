@@ -50,6 +50,7 @@ const accountTypes = [
 import { worldCurrencies } from '@/lib/currencies';
 import { newAccountSchema } from '@/lib/schemas';
 import { createAccount, updateAccount } from '@/commands/account';
+import { useTranslation } from 'react-i18next';
 
 type NewAccount = z.infer<typeof newAccountSchema>;
 
@@ -59,6 +60,8 @@ interface AccountFormlProps {
 }
 
 export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountFormlProps) {
+  const { t } = useTranslation("settings")
+
   const queryClient = useQueryClient();
 
   const addAccountMutation = useMutation({
@@ -66,16 +69,16 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['accounts'] });
       toast({
-        title: 'Account added successfully.',
-        description: 'Start adding or importing this account activities.',
+        title: t("settings.accounts.form.toasts.accountAdded.title"),
+        description: t("settings.accounts.form.toasts.accountAdded.description"),
         className: 'bg-green-500 text-white border-none',
       });
       onSuccess();
     },
     onError: () => {
       toast({
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem adding this account.',
+        title: t("settings.accounts.form.toasts.accountAddedError.title"),
+        description: t("settings.accounts.form.toasts.accountAddedError.description"),
         className: 'bg-red-500 text-white border-none',
       });
     },
@@ -87,7 +90,7 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
       queryClient.invalidateQueries({ queryKey: ['holdings'] });
       queryClient.invalidateQueries({ queryKey: ['portfolio_history'] });
       toast({
-        title: 'Account updated successfully.',
+        title: t("settings.accounts.form.toasts.accountUpdated.title"),
         className: 'bg-green-500 text-white border-none',
       });
       onSuccess();
@@ -111,11 +114,11 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <DialogHeader>
-          <DialogTitle> {defaultValues?.id ? 'Update Account' : 'Add Account'}</DialogTitle>
+          <DialogTitle> {defaultValues?.id ? t("settings.accounts.form.dialog.title.update") : t("settings.accounts.form.dialog.title.add") }</DialogTitle>
           <DialogDescription>
             {defaultValues?.id
-              ? 'Update account information'
-              : ' Add an investment account to track.'}
+              ? t("settings.accounts.form.dialog.description.update") 
+              : t("settings.accounts.form.dialog.description.add") }
           </DialogDescription>
         </DialogHeader>
 
@@ -128,9 +131,9 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Account Name</FormLabel>
+                <FormLabel>{t("settings.accounts.form.fields.name.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Account display name" {...field} />
+                  <Input placeholder={t("settings.accounts.form.fields.name.placeholder")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -141,9 +144,9 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
             name="group"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Account Group</FormLabel>
+                <FormLabel>{t("settings.accounts.form.fields.group.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Retirement, 401K, RRSP, TFSA,..." {...field} />
+                  <Input placeholder={t("settings.accounts.form.fields.group.placeholder")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -155,11 +158,11 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
             name="accountType"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Account Type</FormLabel>
+                <FormLabel>{t("settings.accounts.form.fields.type.label")}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select an account type" />
+                      <SelectValue placeholder={t("settings.accounts.form.fields.type.placeholder")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -180,7 +183,7 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
               name="currency"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Currency</FormLabel>
+                  <FormLabel>{t("settings.accounts.form.fields.currency.label")}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -192,15 +195,15 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
                           {field.value
                             ? worldCurrencies.find((currency) => currency.value === field.value)
                                 ?.label
-                            : 'Select account currency'}
+                            : t("settings.accounts.form.fields.currency.placeholderButton")}
                           <Icons.ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-[300px] p-0">
                       <Command>
-                        <CommandInput placeholder="Search currency..." />
-                        <CommandEmpty>No currency found.</CommandEmpty>
+                        <CommandInput placeholder={t("settings.accounts.form.fields.currency.placeholderInput")} />
+                        <CommandEmpty>{t("settings.accounts.form.fields.currencynotFound")}</CommandEmpty>
                         <CommandGroup>
                           {worldCurrencies.map((currency) => (
                             <CommandItem
@@ -237,7 +240,7 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
                 <FormControl>
                   <Switch checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
-                <FormLabel className="space-y-0 pl-2"> Default Account</FormLabel>
+                <FormLabel className="space-y-0 pl-2"> {t("settings.accounts.form.fields.defaultAccount.label")}</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
@@ -250,7 +253,7 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
                 <FormControl>
                   <Switch checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
-                <FormLabel className="space-y-0 pl-2"> Is Active</FormLabel>
+                <FormLabel className="space-y-0 pl-2"> {t("settings.accounts.form.fields.isActive.label")}</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
@@ -258,12 +261,12 @@ export function AccountForm({ defaultValues, onSuccess = () => {} }: AccountForm
         </div>
         <DialogFooter>
           <DialogTrigger asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("settings.accounts.form.dialog.buttons.cancel")}</Button>
           </DialogTrigger>
           <Button type="submit">
             <Icons.Plus className="h-4 w-4" />
             <span className="hidden sm:ml-2 sm:inline">
-              {defaultValues?.id ? 'Update Account' : 'Add Account'}
+              {defaultValues?.id ? t("settings.accounts.form.dialog.buttons.update") : t("settings.accounts.form.dialog.buttons.add")}
             </span>
           </Button>
         </DialogFooter>

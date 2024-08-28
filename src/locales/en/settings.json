@@ -1,0 +1,243 @@
+{
+  "settings": {
+    "title": "Settings",
+    "sideBar": {
+      "general": "General",
+      "accounts": "Accounts",
+      "goals": "Goals",
+      "appearance": "Appearance"
+    },
+    "accounts": {
+      "page": {
+        "addAccount": "Add account",
+        "title": "Accounts",
+        "description": "Manage your investment and saving accounts.",
+        "noAccount": {
+          "title": "No account added!",
+          "description": "You don&apos;t have any account yet. Start adding your investment accounts.",
+          "buttonLabel": "Add an account"
+        },
+        "toasts": {
+          "accountDeleted": {
+            "title": "Account deleted successfully."
+          },
+          "accountDeletedError": {
+            "title": "Uh oh! Something went wrong.",
+            "description": "There was a problem deleting this account. Please check if there is any data related to this account."
+          }
+        }
+      },
+      "operations": {
+        "sr": "Open",
+        "buttons": {
+          "delete": "Delete",
+          "edit": "Edit"
+        },
+        "deleteAlert": {
+          "title": "Are you sure you want to delete this account and related activities?",
+          "description": "This action cannot be undone.",
+          "cancel": "Cancel",
+          "deleteButton": "Delete"
+        }
+      },
+      "form": {
+        "dialog": {
+          "title": {
+            "update": "Update Account",
+            "add": "Add Account"
+          },
+          "description": {
+            "update": "Update account information",
+            "add": "Add an investment account to track."
+          },
+          "buttons": {
+            "cancel": "Cancel",
+            "update": "Update Account",
+            "add": "Add Account"
+          }
+        },
+        "fields": {
+          "name": {
+            "label": "Account Name",
+            "placeholder": "Account display name"
+          },
+          "group": {
+            "label": "Account Group",
+            "placeholder": "Retirement, 401K, RRSP, TFSA,..."
+          },
+          "type": {
+            "label": "Account Type",
+            "placeholder": "Select an account type",
+            "types": {
+              "securities": "Securities",
+              "cash": "Cash",
+              "crypto": "Crypto"
+            }
+          },
+          "currency": {
+            "label": "Currency",
+            "placeholderButton": "Select account currency",
+            "placeholderInput": "Search currency...",
+            "notFound": "No currency found."
+          },
+          "defaultAccount": {
+            "label": "Default Account"
+          },
+          "isActive": {
+            "label": "Is Active"
+          }
+        },
+        "toasts": {
+          "accountAdded": {
+            "title": "Account added successfully.",
+            "description": "Start adding or importing this account activities."
+          },
+          "accountAddedError": {
+            "title": "Uh oh! Something went wrong.",
+            "description": "There was a problem adding this account."
+          },
+          "accountUpdated": {
+            "title": "Account updated successfully."
+          }
+        }
+      }
+    },
+    "appearance": {
+      "page": {
+        "title": "Appearance",
+        "description": "Customize the appearance of the application."
+      },
+      "fields": {
+        "font": {
+          "label": "Font",
+          "description": "Set your prefered font family to use."
+        },
+        "theme": {
+          "label": "Theme",
+          "description": "Select your prefered theme for the application.",
+          "light": "Light",
+          "dark": "Dark"
+        }
+      },
+      "submitButton": "Update preferences"
+    },
+    "general": {
+      "page": {
+        "title": "General",
+        "description": "Manage the general application settings and preferences."
+      },
+      "fields": {
+        "currency": {
+          "label": "Currency",
+          "placeholderButton": "Select account currency",
+          "placeholderInput": "Search currency...",
+          "notFound": "No currency found.",
+          "description": "Select your base currency."
+        },
+        "language": {
+          "label": "Language",
+          "description": "Select a language"
+        }
+      },
+      "submitButton": "Save"
+    },
+    "goals": {
+      "page": {
+        "title": "Goals",
+        "description": " Manage your investment and saving goals.",
+        "addGoal": "Add goal"
+      },
+      "operations": {
+        "sr": "Open",
+        "buttons": {
+          "delete": "Delete",
+          "edit": "Edit"
+        },
+        "deleteAlert": {
+          "title": "Are you sure you want to delete this goal and related activities?",
+          "description": "This action cannot be undone.",
+          "cancel": "Cancel",
+          "deleteButton": "Delete"
+        }
+      },
+      "form": {
+        "dialog": {
+          "title": {
+            "update": "Update Goal",
+            "add": "Add Goal"
+          },
+          "description": {
+            "update": "Update goal information",
+            "add": "Add an investment goal to track."
+          },
+          "buttons": {
+            "cancel": "Cancel",
+            "update": "Update Goal",
+            "add": "Add Goal"
+          }
+        },
+        "fields": {
+          "title": {
+            "label": "Goal Name",
+            "placeholder": "Goal display title"
+          },
+          "description": {
+            "label": "Goal description",
+            "placeholder": "Goal short description"
+          },
+          "target": {
+            "label": "Target amount",
+            "placeholder": "Target amount"
+          },
+          "archieved": {
+            "label": "Goal Achieved"
+          }
+        },
+        "toasts": {
+          "goalAdded": {
+            "title": "Goal added successfully.",
+            "description": "Start adding or importing this goal activities."
+          },
+          "goalAddedError": {
+            "title": "Uh oh! Something went wrong.",
+            "description": "There was a problem adding this goal."
+          },
+          "goalUpdated": {
+            "title": "Goal updated successfully."
+          }
+        }
+      },
+      "allocations": {
+        "title": "Allocations",
+        "description": "Click on a cell to specify the percentage of each account's allocation to your goals.",
+        "empty": {
+          "title": "No goal added!",
+          "description": "You don&apos;t have any goal yet. Start adding your investment goals.",
+          "addGoal": "Add an goal"
+        },
+        "table": {
+          "head": "Goals \\ Accounts",
+          "total": "total"
+        },
+        "submitButton": "Save Allocations",
+        "toasts": {
+          "allocationSaved": {
+            "title": "Allocation saved successfully."
+          },
+          "allocationExceeded": {
+            "title": "Total allocation for an account can't exceed 100%."
+          }
+        }
+      }
+    },
+    "toasts": {
+      "settingsUpdated": {
+        "title": "Settings updated successfully."
+      },
+      "settingsUpdatedError": {
+        "title": "Uh oh! Something went wrong.",
+        "description": "There was a problem updating your settings."
+      }
+    }
+  }
+}

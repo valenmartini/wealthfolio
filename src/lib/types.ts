@@ -271,6 +271,7 @@ export interface Settings {
   theme: string;
   font: string;
   baseCurrency: string;
+  lng: string;
 }
 
 export interface SettingsContextType {

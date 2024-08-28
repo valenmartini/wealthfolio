@@ -4,6 +4,7 @@ import { useSettings } from './useSettings';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { invoke } from '@tauri-apps/api';
 import { toast } from '@/components/ui/use-toast';
+import { useTranslation } from 'react-i18next';
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
@@ -12,6 +13,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const { data, isLoading, isError } = useSettings();
   const [settings, setSettings] = useState<Settings | null>(null);
   const [accountsGrouped, setAccountsGrouped] = useState(true);
+
+  const { t } = useTranslation("settings");
 
   const updateMutation = useMutation({
     mutationFn: saveSettings,
@@ -22,14 +25,14 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       queryClient.invalidateQueries({ queryKey: ['holdings'] });
       queryClient.invalidateQueries({ queryKey: ['portfolio_history'] });
       toast({
-        title: 'Settings updated successfully.',
+        title: t("settings.toasts.settingsUpdated.title"),
         className: 'bg-green-500 text-white border-none',
       });
     },
     onError: () => {
       toast({
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem updating your settings.',
+        title: t("settings.toasts.settingsUpdatedError.title"),
+        description: t("settings.toasts.settingsUpdatedError.description"),
         className: 'bg-red-500 text-white border-none',
       });
     },
