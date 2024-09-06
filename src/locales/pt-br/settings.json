@@ -1,0 +1,243 @@
+{
+  "settings": {
+    "title": "Configurações",
+    "sideBar": {
+      "general": "Geral",
+      "accounts": "Contas",
+      "goals": "Objetivos",
+      "appearance": "Aparência"
+    },
+    "accounts": {
+      "page": {
+        "addAccount": "Cadastrar conta",
+        "title": "Contas",
+        "description": "Gerencie suas contas de investimento e poupança.",
+        "noAccount": {
+          "title": "Nenhuma conta cadastrada!",
+          "description": "Você não possui nenhuma conta cadastrada. Comece cadastrando suas contas de investimento.",
+          "buttonLabel": "Cadastrar uma conta"
+        },
+        "toasts": {
+          "accountDeleted": {
+            "title": "Conta removida com sucesso."
+          },
+          "accountDeletedError": {
+            "title": "Ops! Algo deu errado.",
+            "description": "Houve um problema ao remover esta conta. Por favor verifique se existem dados relacionados a esta conta."
+          }
+        }
+      },
+      "operations": {
+        "sr": "Abrir",
+        "buttons": {
+          "delete": "Remover",
+          "edit": "Editar"
+        },
+        "deleteAlert": {
+          "title": "Você tem certeza que deseja remover esta conta e as atividades relacionadas a ela?",
+          "description": "Esta ação não pode ser desfeita.",
+          "cancel": "Cancelar",
+          "deleteButton": "Remover"
+        }
+      },
+      "form": {
+        "dialog": {
+          "title": {
+            "update": "Atualizar Conta",
+            "add": "Cadastrar Conta"
+          },
+          "description": {
+            "update": "Atualizar Informações da Conta",
+            "add": "Cadastre uma conta de investimentos para acompanhar."
+          },
+          "buttons": {
+            "cancel": "Cancelar",
+            "update": "Atualizar Conta",
+            "add": "Cadastrar Conta"
+          }
+        },
+        "fields": {
+          "name": {
+            "label": "Nome da Conta",
+            "placeholder": "Nome de exibição da conta"
+          },
+          "group": {
+            "label": "Grupo de Contas",
+            "placeholder": "Aposentadoria, FGTS, Previdência Privada,..."
+          },
+          "type": {
+            "label": "Tipo de Conta",
+            "placeholder": "Selecione o tipo de conta",
+            "types": {
+              "securities": "Ativos",
+              "cash": "Dinheiro",
+              "crypto": "Cripto"
+            }
+          },
+          "currency": {
+            "label": "Moeda",
+            "placeholderButton": "Selecione a moeda da conta",
+            "placeholderInput": "Buscar moeda...",
+            "notFound": "Nenhuma moeda encontrada."
+          },
+          "defaultAccount": {
+            "label": "Conta Padrão"
+          },
+          "isActive": {
+            "label": "Conta Ativa"
+          }
+        },
+        "toasts": {
+          "accountAdded": {
+            "title": "Conta cadastrada com sucesso.",
+            "description": "Comece cadastrando ou importando as atividades desta conta."
+          },
+          "accountAddedError": {
+            "title": "Ops! Algo deu errado.",
+            "description": "Houve um problema ao cadastrar esta conta."
+          },
+          "accountUpdated": {
+            "title": "Conta atualizada com sucesso."
+          }
+        }
+      }
+    },
+    "appearance": {
+      "page": {
+        "title": "Aparência",
+        "description": "Personalize a aparência da aplicação.",
+      },
+      "fields": {
+        "font": {
+          "label": "Fonte",
+          "description": "Selecione sua fonte preferida",
+        },
+        "theme": {
+          "label": "Tema",
+          "description": "Selecione um tema",
+          "light": "Claro",
+          "dark": "Escuro"
+        }
+      },
+      "submitButton": "Atualizar preferências"
+    },
+    "general": {
+      "page": {
+        "title": "Geral",
+        "description": "Configurações gerais da aplicação."
+      },
+      "fields": {
+        "currency": {
+          "label": "Moeda",
+          "placeholderButton": "Selecione a moeda da conta",
+          "placeholderInput": "Buscar moeda...",
+          "notFound": "Nenhuma moeda encontrada.",
+          "description": "Selecione a moeda padrão para a aplicação."
+        },
+        "language": {
+          "label": "Idioma",
+          "description": "Selecione o idioma da aplicação."
+        }
+      },
+      "submitButton": "Salvar"
+    },
+    "goals": {
+      "page": {
+        "title": "Objetivos",
+        "description": "Gerencie suas metas de investimento.",
+        "addGoal": "Cadastrar Objetivo"
+      },
+      "operations": {
+        "sr": "Abrir",
+        "buttons": {
+          "delete": "Remover",
+          "edit": "Editar"
+        },
+        "deleteAlert": {
+          "title": "Você tem certeza que deseja remover este objetivo e as atividades relacionadas a ele?",
+          "description": "Esta ação não pode ser desfeita.",
+          "cancel": "Cancelar",
+          "deleteButton": "Remover"
+        }
+      },
+      "form": {
+        "dialog": {
+          "title": {
+            "update": "Atualizar Objetivo",
+            "add": "Cadastrar Objetivo"
+          },
+          "description": {
+            "update": "Atualize as informações do objetivo",
+            "add": "Cadastrar uma meta de investimento para acompanhar."
+          },
+          "buttons": {
+            "cancel": "Cancelar",
+            "update": "Atualizar Objetivo",
+            "add": "Cadastrar Objetivo"
+          }
+        },
+        "fields": {
+          "title": {
+            "label": "Título do Objetivo",
+            "placeholder": "Título de exibição do objetivo"
+          },
+          "description": {
+            "label": "Descrição do Objetivo",
+            "placeholder": "Descrição breve do objetivo"
+          },
+          "target": {
+            "label": "Valor Alvo",
+            "placeholder": "Valor alvo"
+          },
+          "archieved": {
+            "label": "Objetivo Alcançado"
+          }
+        },
+        "toasts": {
+          "goalAdded": {
+            "title": "Objetivo cadastrado com sucesso.",
+            "description": "Comece cadastrando as atividades relacionadas a este objetivo."
+          },
+          "goalAddedError": {
+            "title": "Ops! Algo deu errado.",
+            "description": "Houve um problema ao cadastrar este objetivo."
+          },
+          "goalUpdated": {
+            "title": "Objetivo atualizado com sucesso."
+          }
+        }
+      },
+      "allocations": {
+        "title": "Alocações",
+        "description": "Clique em uma célula para definir a porcentagem alocada para cada objetivo.",
+        "empty": {
+          "title": "Nenhum objetivo cadastrado!",
+          "description": "Você não possui nenhum objetivo cadastrado. Comece cadastrando suas metas de investimento.",
+          "addGoal": "Cadastrar um objetivo"
+        },
+        "table": {
+          "head": "Objetivos \\ Contas",
+          "total": "total"
+        },
+        "submitButton": "Salvar Alocações",
+        "toasts": {
+          "allocationSaved": {
+            "title": "Alocações salvas com sucesso."
+          },
+          "allocationExceeded": {
+            "title": "Alocação total não pode exceder 100%.",
+          }
+        }
+      }
+    },
+    "toasts": {
+      "settingsUpdated": {
+        "title": "Configurações atualizadas com sucesso."
+      },
+      "settingsUpdatedError": {
+        "title": "Ops! Algo deu errado.",
+        "description": "Houve um problema ao atualizar suas configurações."
+      }
+    }
+  }
+}
