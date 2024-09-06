@@ -6,6 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import settings_en from './locales/en/settings.json';
 import settings_es from './locales/es/settings.json';
+import settings_pt_br from './locales/pt-br/settings.json';
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -17,6 +18,9 @@ i18next.init({
     },
     es: {
       settings: settings_es,
+    },
+    'pt-br': {
+      settings: settings_pt_br,
     },
   },
 });
